@@ -9,40 +9,40 @@ namespace WebApplication3.Models.Repository
 {
     public class ProductRepository : IProductRepository
     {
-        EfDbContext context = new EfDbContext();
+        EfDbContext _context = new EfDbContext();
 
         public void AddProduct(Product product)
         {
-            context.Products.Add(product);
+            _context.Products.Add(product);
             SaveProduct();
         }
 
         public void DeleteProduct(string id)
         {
-            Product product = context.Products.Find(id);
-            context.Products.Remove(product);
+            Product product = _context.Products.Find(id);
+            _context.Products.Remove(product);
             SaveProduct();
         }
 
         public void EditProduct(Product product)
         {
-            context.Entry(product).State = EntityState.Modified;
+            _context.Entry(product).State = EntityState.Modified;
             SaveProduct();
         }
 
         public List<Product> GetAllProduct()
         {
-            return context.Products.ToList();
+            return _context.Products.ToList();
         }
 
         public Product GetProductByID(string id)
         {
-            return context.Products.Find(id);
+            return _context.Products.Find(id);
         }
 
         public void SaveProduct()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
     }
 }

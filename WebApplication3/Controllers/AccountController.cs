@@ -18,6 +18,15 @@ namespace WebApplication3.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+
+        // For Add defaut role.
+        public ApplicationUserManager UserManagerRole
+        {
+            get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+            private set { _userManager = value; }
+        }
+
+
         public AccountController()
         {
         }
@@ -155,6 +164,7 @@ namespace WebApplication3.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    this.UserManagerRole.AddToRole(user.Id, "Retail");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
