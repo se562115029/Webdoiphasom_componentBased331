@@ -1,0 +1,43 @@
+﻿@model WebApplication3.Models.Entities.CheckOutOrder
+
+@{
+    ViewBag.Title = "AddOrder";
+}
+@using Microsoft.AspNet.Identity
+<h2>AddOrder</h2>
+
+@using (Html.BeginForm("SaveOrder", "Product", FormMethod.Post,
+                                                                                          new { enctype = "multipart/form-data" }))
+{  @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>CheckOutOrder</h4>
+        <hr />
+       
+      
+        <div class="form-group">
+            @Html.LabelFor(model => model.Adress, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Adress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Adress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <select id="ddlFruits" name="CostFormDoi">
+                <option value=""></option>
+                <option value="Share with other">Share with other</option>
+                <option value="transferred immediately">transferred immediately 800 Bath</option>
+                <option value="Free">Free</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

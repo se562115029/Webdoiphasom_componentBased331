@@ -1,0 +1,82 @@
+﻿@model IEnumerable<WebApplication3.Models.Entities.CheckOutOrder>
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Index";
+}
+<center><img src="~/Content/image/13278124_1001732169922496_1473573788_n.png" /></center>
+<p>
+  
+</p>
+<table class="table">
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.DateOrder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostFormMountain)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FreesTransfer)
+        </th>
+        <th>
+            Total of Transportation frees
+            </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPayment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ConfirmStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PayMentStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeliveryStatus)
+        </th>
+        <th></th>
+    </tr>
+    @{float s = 0; }
+@foreach (var item in Model) {
+    s = item.CostFormMountain.AsFloat() * 1 + item.FreesTransfer.AsFloat() * 1;
+     <tr>
+    
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOrder)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adress)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.CostFormMountain)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FreesTransfer)
+        </td>
+        <td>@s</td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalPayment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ConfirmStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PayMentStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeliveryStatus)
+        </td>
+        <td>
+            @Html.ActionLink("Upload Paid Receipt ", "Create", "Payment")
+        </td>
+       
+    </tr>
+   
+} 
+
+</table>

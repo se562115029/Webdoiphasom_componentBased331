@@ -1,0 +1,83 @@
+﻿@using WebApplication3.Models.Entities
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "AddToSession";
+}
+
+@ViewBag.name
+<center><img src="~/Content/image/13250450_1001731286589251_1904951480_n.png" /></center>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@using WebApplication3.Controllers
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            Product ID
+        </th>
+        <th>
+            Product Type
+        </th>
+        <th>
+            Product Name
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Quanlity
+        </th>
+        <th>
+            Total
+        </th>
+        <th></th>
+    </tr>
+    @{double s = 0; }
+    @foreach (Cart item in (List<Cart>)Session["cartitem"])
+    {
+        <tr>
+            <td>
+                @item.Pro.ID
+
+            </td>
+            <td>
+                @item.Pro.Name
+
+            </td>
+            <td>
+                @item.Pro.description
+
+            </td>
+            <td>
+                @item.Pro.PriceWholesale
+            </td>
+            <td>
+                @item.Quantity
+
+            </td>
+            <td>
+                @(item.Quantity * item.Pro.PriceWholesale)
+
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteProductInCart", "Product", new { id = item.Pro.ID }, null)
+
+            </td>
+        </tr>
+        s += item.Pro.PriceWholesale * item.Quantity;
+
+    }
+    <tr>
+</table>
+<h3>Total price :<</h3>> <p>@s</p>
+
+@Html.ActionLink("Check Out", "AddOrder", "Product")
+
+

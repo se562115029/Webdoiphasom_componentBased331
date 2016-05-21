@@ -1,0 +1,34 @@
+﻿@model IEnumerable<WebApplication3.Models.Entities.Payment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<center><img src="~/Content/image/13249524_1001732649922448_1581685678_n.png" /></center>
+<p></p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderID)
+        </th>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.imageTranferReceipt)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderID)
+        </td>
+     
+        <td>
+            <img src="@Url.Content(item.imageTranferReceipt)" width="100" height="100" />
+        </td>
+        
+    </tr>
+}
+
+</table>
